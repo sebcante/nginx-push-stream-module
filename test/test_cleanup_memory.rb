@@ -136,7 +136,7 @@ class TestCreateManyChannels < Test::Unit::TestCase
         count += 1
       end
 
-      EM.add_timer(15) do # wait cleanup timer to be executed one time
+      EM.add_timer(14) do # wait cleanup timer to be executed one time
         pub_2 = EventMachine::HttpRequest.new(nginx_address + '/channels-stats?id=' + channel.to_s).get :head => headers, :timeout => 60
         pub_2.callback {
           assert_equal(200, pub_2.response_header.status, "Don't get channels statistics")

@@ -149,8 +149,8 @@ class TestSetuParameters < Test::Unit::TestCase
   end
 
   def test_memory_cleanup_timeout
-    expected_error_message = "memory cleanup objects ttl cannot't be less than 30."
-    @memory_cleanup_timeout = '15s'
+    expected_error_message = "memory cleanup objects ttl cannot't be less than 15."
+    @memory_cleanup_timeout = '10s'
 
     self.create_config_file
     stderr_msg = self.start_server

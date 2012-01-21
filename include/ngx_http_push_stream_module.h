@@ -62,7 +62,6 @@ typedef struct {
 typedef struct {
     ngx_flag_t                      enabled;
     size_t                          shm_size;
-    ngx_msec_t                      memory_cleanup_interval;
     time_t                          shm_cleanup_objects_ttl;
     ngx_str_t                       channel_deleted_message_text;
     ngx_str_t                       ping_message_text;
@@ -113,14 +112,15 @@ typedef struct {
     time_t                          time;
     ngx_flag_t                      deleted;
     ngx_int_t                       id;
-    ngx_str_t                      *raw;
     ngx_int_t                       tag;
+    ngx_int_t                       workers_ref_count;
+    ngx_str_t                       raw;
     ngx_str_t                      *event_id;
     ngx_str_t                      *event_type;
     ngx_str_t                      *event_id_message;
     ngx_str_t                      *event_type_message;
     ngx_str_t                      *formatted_messages;
-    ngx_int_t                       workers_ref_count;
+    u_char                          dummy[10];
 } ngx_http_push_stream_msg_t;
 
 typedef struct ngx_http_push_stream_subscriber_s ngx_http_push_stream_subscriber_t;

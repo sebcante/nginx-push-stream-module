@@ -396,7 +396,6 @@ ngx_http_push_stream_create_main_conf(ngx_conf_t *cf)
 
     mcf->enabled = 0;
     mcf->shm_size = NGX_CONF_UNSET_SIZE;
-    mcf->memory_cleanup_interval = NGX_CONF_UNSET_MSEC;
     mcf->shm_cleanup_objects_ttl = NGX_CONF_UNSET;
     mcf->channel_deleted_message_text.data = NULL;
     mcf->ping_message_text.data = NULL;
@@ -474,10 +473,6 @@ ngx_http_push_stream_init_main_conf(ngx_conf_t *cf, void *parent)
         ngx_conf_log_error(NGX_LOG_ERR, cf, 0, "push_stream_max_channel_id_length cannot be zero.");
         return NGX_CONF_ERROR;
     }
-
-    // calc memory cleanup interval
-    ngx_uint_t interval = conf->shm_cleanup_objects_ttl / 10;
-    conf->memory_cleanup_interval = (interval * 1000) + 1000; // min 4 seconds (((30 / 10) * 1000) + 1000)
 
     // calc buffer cleanup interval
     if (conf->message_ttl != NGX_CONF_UNSET) {
